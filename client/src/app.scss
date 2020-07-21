@@ -1,6 +1,7 @@
 @import './Helpers/config.scss';
 @import './Helpers/Website.scss';
 @import './Helpers/login.scss';
+@import './Helpers/application.scss';
 
 
 * {
@@ -18,7 +19,8 @@ p,
 h2,
 h3,
 h4,
-label {
+label,
+span {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -59,6 +61,8 @@ button {
   background-color: $bg_30;
   border-radius: 16px;
   color: white;
+  cursor: pointer;
+  text-align: center;
 }
 
 button.cta {

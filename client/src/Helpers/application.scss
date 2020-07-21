@@ -1,0 +1,251 @@
+.application_container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h2 {
+        font-size: 1em;
+        font-weight: 400;
+    }
+
+
+
+
+    .welcome_container {
+        width: 400px;
+        display: grid;
+        grid-template-areas:
+            "logo content1 content1"
+            "logo content2 content2";
+        grid-template-columns: 50px auto;
+        gap: 0px 20px
+    }
+
+
+    .welcome_img {
+        grid-area: logo;
+        height: 50px;
+        width: 50px;
+
+        img {
+            height: 100%;
+            width: auto;
+        }
+    }
+
+    .message {
+        grid-area: content1;
+    }
+
+    .tasks_count {
+        grid-area: content2;
+        display: flex;
+        flex-direction: row;
+
+        p {
+            padding-right: 10px;
+        }
+    }
+}
+
+
+.menu {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 75px;
+
+
+    button {
+        margin-right: 20px;
+    }
+
+    .add {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        button.add {
+            height: 40px;
+            width: 40px;
+            background-color: white;
+            transition: all 1s ease;
+            border-radius: 50%;
+
+            img {
+                height: 70%;
+                width: auto;
+                z-index: 1;
+            }
+        }
+
+        button.toggle {
+            background-color: white;
+            color: $purple;
+
+        }
+
+    }
+
+    .filter {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        button {
+            margin: 0 10px;
+            min-width: 75px;
+            cursor: pointer;
+        }
+    }
+
+
+
+}
+
+
+
+.task_holder {
+    min-height: 400px;
+    width: 100%;
+    border-radius: 18px;
+    margin-top: 50px;
+    align-self: center;
+    // -webkit-box-shadow: 16px 0px 16px 5px rgba(61, 14, 173, 1);
+    // -moz-box-shadow: 16px 0px 16px 5px rgba(61, 14, 173, 1);
+    // box-shadow: 0px 16px 16px 5px rgba(61, 14, 173, 1);
+
+
+    .task_items {
+        display: grid;
+        grid-auto-rows: 50px;
+    }
+
+    form {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 300px));
+        margin: 25px 0px;
+
+        input,
+        select {
+            padding: 10px;
+            border-radius: 4px;
+            height: 45px;
+            margin-right: 20px;
+        }
+    }
+}
+
+
+
+
+.item_container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50px 300px 100px auto;
+    align-items: center;
+    border-bottom: 1px solid rgb(77, 16, 189);
+    justify-content: space-between;
+
+    p {
+        font-weight: 300;
+    }
+
+    // p:nth-child(4) {
+    //     justify-self: end;
+    // }
+
+
+    .status {
+        padding: 8px 14px;
+        background-color: rgb(182, 55, 93);
+        border-radius: 12px;
+        color: white;
+        max-width: 120px;
+        text-align: center;
+    }
+
+    .status.isComplete {
+        background-color: rgba(58, 202, 58, 0.822);
+    }
+
+
+    .category {
+        padding: 4px 4px;
+        background-color: rgb(182, 55, 93);
+        border-radius: 12px;
+        color: white;
+        max-width: 120px;
+        text-align: center;
+
+    }
+
+
+
+
+
+    // Check Boxes
+    .custom_check {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        input {
+            height: 20px;
+            width: 20px;
+            opacity: 0;
+            cursor: pointer;
+            background-color: green;
+
+        }
+
+        .check {
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            top: 50%;
+            left: 50%;
+            background-color: #eee;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            border-radius: 4px;
+
+        }
+
+        // Not checked
+        input~.check {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+
+        // Checked
+        input:checked~.check {
+            background-color: white;
+        }
+
+
+
+        /* Show the checkmark when checked */
+        input:checked~.check:after {
+            display: block;
+        }
+
+    }
+
+
+}

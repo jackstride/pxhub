@@ -12,7 +12,7 @@ const Login = ({ isAuth, login }) => {
 
   useEffect(() => {
     if (isAuth) {
-      history.push('/');
+      history.push('/app');
     }
   }, [isAuth, history]);
 

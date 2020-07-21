@@ -16,7 +16,7 @@ router.post(`/login`, async (req, res, next) => {
     };
     const found = await pool.query(query);
 
-    const { user_id, email, password } = found.rows[0];
+    const { user_id, email, first_name, password } = found.rows[0];
 
     const match = await bcrypt.compare(inputPassword, password);
 
@@ -24,13 +24,13 @@ router.post(`/login`, async (req, res, next) => {
       const payload = {
         user_id,
         email,
+        first_name,
       };
 
       const token = await jwt.sign(payload, process.env.JWT_SECRET);
 
       res.header('Authorization', `bearer${token}`).json({ user: payload });
     }
-    res.sendStatus(200);
   } catch (error) {
     console.log(error);
     res.sendStatus(504);
