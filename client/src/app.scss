@@ -1,8 +1,71 @@
 @import './Helpers/config.scss';
+@import './Helpers/Website.scss';
+@import './Helpers/login.scss';
+
 
 * {
   margin: 0;
   border: 0;
   box-sizing: border-box;
   font-size: 16px;
+}
+
+
+h1,
+h2,
+a,
+p,
+h2,
+h3,
+h4,
+label {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+ul li {
+  list-style-type: none;
+  text-decoration: none;
+}
+
+a {
+  color: white
+}
+
+
+h1 {
+  font-size: 5em;
+  color: white;
+}
+
+h2 {
+  color: $purple;
+  font-size: 2em;
+}
+
+h4 {
+  font-size: 1em;
+  font-weight: 600;
+}
+
+p {
+  font-size: 1.2em;
+  color: white;
+  line-height: 32px;
+}
+
+
+button {
+  padding: 8px 16px;
+  background-color: $bg_30;
+  border-radius: 16px;
+  color: white;
+}
+
+button.cta {
+  height: 48px;
+  width: 132px;
+  margin-top: 20px;
+  font-size: 1.2em;
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  color: $purple;
 }

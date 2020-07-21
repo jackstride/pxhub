@@ -1,14 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './pages/Index';
+import Login from './pages/Login';
+import Application from './pages/Application';
+import Protected from './Helpers/ProtectedRoute';
 
 function App() {
-  const Test = () => <h1> Test App</h1>;
   return (
     <Router>
       <Switch>
-        <Route path="/">
-          <Test />
-        </Route>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Protected path="/app">
+          <Application />
+        </Protected>
       </Switch>
     </Router>
   );
