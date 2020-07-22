@@ -6,7 +6,9 @@ const port = 1337;
 
 require('dotenv').config();
 require('./DBConnect');
+
 const authRoute = require('./Routes/authRoute');
+const taskRoute = require('./Routes/taskRoute');
 
 const app = express();
 
@@ -16,5 +18,18 @@ app.use(helmet());
 app.use(cors());
 
 app.use('/auth', authRoute);
+app.use('/task', taskRoute);
+
+// Errors handler I like it
+app.use((error, req, res, next) => {
+  if (error.status) {
+    res.status(error.status);
+  } else {
+    res.status(500);
+  }
+  res.json({
+    message: error.message,
+  });
+});
 
 app.listen(port, () => console.log('Application is listening on port ' + port));

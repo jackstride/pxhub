@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
-const conenctString = process.env.CONNECTION_STRING;
 
+// Future setup in .env file
 const pool = new Pool({
   user: 'postgres',
   password: 'rootuser',
@@ -10,35 +10,20 @@ const pool = new Pool({
 });
 
 const connectPost = async () => {
-  console.log('Before Connection');
+  console.log('Connecting to the database...');
   await pool.connect();
-  console.log('connected');
+  console.log('Connecton Successful');
 };
 
 try {
   connectPost();
-  // const query = {
-  //   text:
-  //     'INSERT INTO users(user_id, email, password, first_name) VALUES($1, $2,$3,$4)',
-  //   values: [
-  //     '05',
-  //     'test@test.com',
-  //     '$2b$10$1EyhjHQ5WvB3x8aWnA9lJebPDitsZsa.MA6955gDqzlQbeJJ.ml.m',
-  //     'Jack',
-  //   ],
-  // };
-  // // callback
-  // pool.query(query, (err, res) => {
-  //   if (err) {
-  //     console.log(err);
-  //     console.log(err.stack);
-  //   } else {
-  //     console.log('added');
-  //     console.log(res.rows[0]);
-  //   }
-  // });
 } catch (error) {
   console.log(error);
 }
 
-module.exports = pool;
+// Dwefualt Node PostGrey Project Structure
+module.exports = {
+  query: (text, params, callback) => {
+    return pool.query(text, params);
+  },
+};

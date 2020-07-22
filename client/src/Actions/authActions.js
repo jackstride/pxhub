@@ -1,30 +1,25 @@
 import axios from 'axios';
-import {
-  USER_LOGIN,
-  USER_LOGOUT,
-  LOAD_USER,
-  VERIFY_SOCIAL_AUTH,
-} from './types';
+import { USER_LOGIN, USER_LOGOUT, LOAD_USER } from './types';
 
 // Get the use token
 
 const userToken = localStorage.getItem('token');
 
-export const loadUser = () => (dispatch) => {
-  axios
-    .get('/app', {
-      // withCredentials: true,
-      headers: {
-        Authorization: userToken,
-      },
-    })
-    .then((res) => {
-      dispatch({
-        type: LOAD_USER,
-        payload: res.data,
-      });
-    });
-};
+// export const loadUser = () => (dispatch) => {
+//   axios
+//     .get('/app', {
+//       // withCredentials: true,
+//       headers: {
+//         Authorization: userToken,
+//       },
+//     })
+//     .then((res) => {
+//       dispatch({
+//         type: LOAD_USER,
+//         payload: res.data,
+//       });
+//     });
+// };
 
 export const user_login = (values) => (dispatch) => {
   axios.post(`/auth/login`, values).then((res) => {
@@ -45,10 +40,10 @@ export const register = (values) => (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
-  axios.post('/auth/logout').then((res) => {
-    dispatch({
-      type: USER_LOGOUT,
-    });
+  console.log('this');
+  window.localStorage.removeItem('token');
+  dispatch({
+    type: USER_LOGOUT,
   });
 };
 
@@ -57,13 +52,13 @@ const saveToken = (token) => {
   window.localStorage.setItem('token', localToken);
 };
 
-export const verifySocialAuth = () => (dispatch) => {
-  axios.get('/auth/social_verification').then((res) => {
-    const token = res.data.token;
-    window.localStorage.setItem('token', token);
-    dispatch({
-      type: VERIFY_SOCIAL_AUTH,
-      payload: res.data,
-    });
-  });
-};
+// export const verifySocialAuth = () => (dispatch) => {
+//   axios.get('/auth/social_verification').then((res) => {
+//     const token = res.data.token;
+//     window.localStorage.setItem('token', token);
+//     dispatch({
+//       type: VERIFY_SOCIAL_AUTH,
+//       payload: res.data,
+//     });
+//   });
+// };

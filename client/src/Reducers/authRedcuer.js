@@ -1,4 +1,4 @@
-import { USER_LOGIN } from '../Actions/types';
+import { USER_LOGIN, USER_LOGOUT } from '../Actions/types';
 
 const intitialState = {
   isAuthenticated: null,
@@ -11,6 +11,12 @@ export default (state = intitialState, action) => {
       return {
         isAuthenticated: true,
         user: action.payload,
+      };
+    }
+    case USER_LOGOUT: {
+      return {
+        isAuthenticated: false,
+        user: null,
       };
     }
     default: {

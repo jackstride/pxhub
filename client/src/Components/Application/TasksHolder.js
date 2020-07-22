@@ -1,37 +1,20 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
+import { connect } from 'react-redux';
 import TaskItem from './TaskItem';
 import TaskForm from './TaskForm';
 import Plus from '../../images/plus.svg';
+import { getAllTasks, markTask, deleteTask } from '../../Actions/taskActions';
 
-const TasksHolder = () => {
+const TasksHolder = ({ getAllTasks, markTask, deleteTask, items, user_id }) => {
   const [showForm, setForm] = useState(false);
   const [showOptions, setOptions] = useState(false);
-  const [items] = useState([
-    {
-      title: 'Walk the dog',
-      category: 'Work',
-      isCompleted: false,
-      date: '2 Days ago',
-    },
-    {
-      title: 'Write theseis',
-      isCompleted: true,
-      category: 'Education',
-      date: '2 Days ago',
-    },
-    {
-      title: 'Complete this project',
-      isCompleted: true,
-      category: 'In Progress',
-      date: '2 Days ago',
-    },
-    {
-      title: 'Get a new job',
-      isCompleted: false,
-      category: 'Work',
-      date: '2 Days ago',
-    },
-  ]);
+  const [selectValues, setSelectValues] = useState([]);
+
+  useEffect(() => {
+    getAllTasks(user_id);
+  }, [getAllTasks, user_id]);
+
+  useEffect(() => {}, [markTask]);
   return (
     <Fragment>
       <div className="menu">
@@ -54,9 +37,13 @@ const TasksHolder = () => {
           </button>
           {showOptions ? (
             <Fragment>
-              <button>Remove</button>
-              <button>Mark Complete</button>
-              <button>Mark To do</button>
+              <button onClick={() => deleteTask(selectValues)}>Remove</button>
+              <button onClick={() => markTask(selectValues, 'true')}>
+                Mark Complete
+              </button>
+              <button onClick={() => markTask(selectValues, 'false')}>
+                Mark To do
+              </button>
             </Fragment>
           ) : null}
         </div>
@@ -70,13 +57,33 @@ const TasksHolder = () => {
       <div className="task_holder">
         {showForm ? <TaskForm /> : null}
         <div className="task_items">
-          {items.map((item) => (
-            <TaskItem data={item} />
-          ))}
+          {items &&
+            items.map((item, i) => (
+              <TaskItem
+                key={i}
+                data={item}
+                selectValues={selectValues}
+                setSelectValues={setSelectValues}
+              />
+            ))}
         </div>
       </div>
     </Fragment>
   );
 };
 
-export default TasksHolder;
+const mapStateToProps = (state) => {
+  return {
+    user_id: state.auth.user.user_id,
+    items: state.tasks.tasks,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAllTasks: (user_id) => dispatch(getAllTasks(user_id)),
+    markTask: (values, bool) => dispatch(markTask(values, bool)),
+    deleteTask: (values) => dispatch(deleteTask(values)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(TasksHolder);

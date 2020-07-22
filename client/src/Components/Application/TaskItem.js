@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TaskItem = ({ data }) => {
+const TaskItem = ({ data, selectValues, setSelectValues }) => {
   const getBackgroundColor = (cat) => {
     cat = cat.toLowerCase().replace(' ', '');
     switch (cat) {
@@ -21,25 +21,33 @@ const TaskItem = ({ data }) => {
   return (
     <div className="item_container">
       <div className="custom_check">
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          value={data.task_id}
+          onChange={(e) => {
+            if (e.target.checked) {
+              setSelectValues([...selectValues, e.target.value]);
+            }
+          }}
+        />
         <span className="check" />
       </div>
       <p
         style={
-          data.isCompleted
+          data.is_completed
             ? { color: 'white', textDecoration: 'line-through' }
             : { color: 'white' }
         }
       >
-        {data.title}
+        {data.task_title}
       </p>
       <div
-        style={{ backgroundColor: getBackgroundColor(data.category) }}
+        style={{ backgroundColor: getBackgroundColor(data.task_category) }}
         className="category"
       >
-        <span>{data.category}</span>
+        <span>{data.task_category}</span>
       </div>
-      <p>{data.date}</p>
+      <p>{data.task_date}</p>
       {/* <div className={data.isCompleted ? 'status isComplete' : 'status'}>
         <span>{data.isCompleted ? 'Completed' : 'Outstanding'}</span>
       </div> */}

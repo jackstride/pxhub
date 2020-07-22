@@ -1,16 +1,56 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addTask } from '../../Actions/taskActions';
+import useForm from '../../Hooks/useForm';
 
-const TaskForm = () => {
+const TaskForm = ({ user_id, addTask }) => {
+  const [values, handleChange] = useForm();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    values.user_id = user_id;
+    console.log(values.task_category);
+
+    if (!values.task_category) {
+      values.task_category = 'work';
+    }
+
+    addTask(values);
+  };
+
   return (
-    <form>
-      <input placeholder="Enter your task" type="text" />
-      <select>
-        <option>Work</option>
-        <option>Education</option>
-        <option>In Progress</option>
+    <form method="post" onSubmit={handleSubmit}>
+      <input
+        placeholder="Enter your task"
+        onChange={handleChange}
+        name="task_title"
+        value={values.task_title || ''}
+        type="text"
+      />
+      <select
+        name="task_category"
+        onChange={handleChange}
+        value={values.task_category || ''}
+      >
+        <option value="Work">Work</option>
+        <option value="Education">Education</option>
+        <option value="In progress">In Progress</option>
       </select>
+      <input type="submit" name="submit" />
     </form>
   );
 };
 
-export default TaskForm;
+const mapStateToProps = (state) => {
+  return {
+    user_id: state.auth.user.user_id,
+  };
+};
+
+const mapDispatchToProps = () => (dispatch) => {
+  return {
+    addTask: (values) => dispatch(addTask(values)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskForm);

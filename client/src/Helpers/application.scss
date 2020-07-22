@@ -130,6 +130,8 @@
     .task_items {
         display: grid;
         grid-auto-rows: 50px;
+        gap: 10px;
+        padding: 0px 10px;
     }
 
     form {
@@ -155,8 +157,9 @@
     display: grid;
     grid-template-columns: 50px 300px 100px auto;
     align-items: center;
-    border-bottom: 1px solid rgb(77, 16, 189);
-    justify-content: space-between;
+    justify-content: space-around;
+    background-color: #611edd;
+    border-radius: 8px;
 
     p {
         font-weight: 300;

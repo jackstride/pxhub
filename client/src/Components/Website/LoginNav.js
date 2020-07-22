@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { logout } from '../../Actions/authActions';
 import { connect } from 'react-redux';
 
-const LoginNav = ({ isAuth }) => {
+const LoginNav = ({ isAuth, logout }) => {
   const handleCLick = () => {
     window.location.href = '/login';
   };
   return (
-    <button id="login" onClick={handleCLick}>
-      {isAuth ? 'Portal' : 'Sign in'}
-    </button>
+    <Fragment>
+      <button id="login" onClick={handleCLick}>
+        {isAuth ? 'Portal' : 'Sign in'}
+      </button>
+      {isAuth && <button onClick={() => logout()}>Logout</button>}
+    </Fragment>
   );
+};
+
+const mapDispatchToProps = () => (dispatch) => {
+  return {
+    logout: () => dispatch(logout()),
+  };
 };
 
 const mapStateToProps = (state) => {
@@ -19,4 +29,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(LoginNav);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginNav);
