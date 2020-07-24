@@ -9,6 +9,11 @@
     .form_container {
         width: 450px;
 
+
+        @include tablet {
+            width: 95%;
+        }
+
         h2 {
             color: white;
             align-self: start;
@@ -68,9 +73,11 @@
 
                 &[type=submit] {
                     width: 50%;
-                    border-radius: 24px;
+                    border-radius: 12px;
                     cursor: pointer;
                     color: black;
+                    -webkit-appearance: none;
+                    background-color: white;
                 }
             }
         }

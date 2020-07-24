@@ -2,8 +2,13 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    margin-top: 200px;
     flex-direction: column;
+
+
+    @include tablet {
+        margin-top: 50px;
+    }
 
 
 
@@ -26,7 +31,11 @@
             "logo content1 content1"
             "logo content2 content2";
         grid-template-columns: 50px auto;
-        gap: 0px 20px
+        gap: 0px 20px;
+
+        @include tablet {
+            width: 100%;
+        }
     }
 
 
@@ -66,6 +75,7 @@
     height: 75px;
 
 
+
     button {
         margin-right: 20px;
     }
@@ -87,6 +97,7 @@
                 height: 70%;
                 width: auto;
                 z-index: 1;
+                pointer-events: none;
             }
         }
 
@@ -107,6 +118,24 @@
             margin: 0 10px;
             min-width: 75px;
             cursor: pointer;
+        }
+    }
+
+    @include tablet {
+        flex-direction: column;
+        align-items: start;
+        height: fit-content;
+        margin: 20px 0px;
+
+        .add {
+            flex-direction: column;
+            width: 100%;
+            align-items: flex-start;
+            margin: 10px 0px;
+        }
+
+        .actions {
+            margin: 10px 0px;
         }
     }
 
@@ -139,12 +168,23 @@
         grid-template-columns: repeat(auto-fill, minmax(250px, 300px));
         margin: 25px 0px;
 
+        @include tablet {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            gap: 15px;
+        }
+
         input,
         select {
+            -webkit-appearance: none;
             padding: 10px;
             border-radius: 4px;
             height: 45px;
             margin-right: 20px;
+            background-color: white;
+            margin-top: 10px;
+            width: 70%;
         }
     }
 }
@@ -161,13 +201,23 @@
     background-color: #611edd;
     border-radius: 8px;
 
+
     p {
         font-weight: 300;
     }
 
-    // p:nth-child(4) {
-    //     justify-self: end;
-    // }
+
+    @include tablet {
+        grid-template-columns: 20% 50% 30%;
+
+        p {
+            &:nth-child(4) {
+                display: none;
+            }
+        }
+    }
+
+
 
 
     .status {

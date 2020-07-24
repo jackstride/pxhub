@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useForm = () => {
+const useForm = (submitCallback) => {
   let [state, setState] = useState({});
 
   const handleChange = (e) => {
@@ -8,7 +8,13 @@ const useForm = () => {
     setState((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
 
-  return [state, handleChange];
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitCallback();
+    setState({});
+  };
+
+  return [state, handleChange, handleSubmit];
 };
 
 export default useForm;

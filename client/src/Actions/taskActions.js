@@ -4,7 +4,7 @@ import {
   GET_ALL_TASKS,
   MARK_TASK,
   DELETE_TASK,
-  SET_VISIBILITY_FILTER,
+  SET_TASK_SORT,
 } from './types';
 
 export const addTask = (values) => (dispatch) => {
@@ -62,7 +62,7 @@ export const deleteTask = (values) => (dispatch) => {
     });
 };
 
-export const setVisibilityFilter = (filter) => ({
-  type: 'SET_VISIBILITY_FILTER',
+export const sortAllTasks = (filter) => ({
+  type: SET_TASK_SORT,
   filter,
 });

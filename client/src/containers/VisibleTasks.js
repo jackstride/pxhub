@@ -1,6 +1,11 @@
 import { connect } from 'react-redux';
 import TasksHolder from '../Components/Application/TasksHolder';
-import { getAllTasks, markTask, deleteTask } from '../Actions/taskActions';
+import {
+  getAllTasks,
+  markTask,
+  deleteTask,
+  sortAllTasks,
+} from '../Actions/taskActions';
 import { SHOW_COMPLETED, SHOW_TODO, SHOW_ALL } from '../Actions/types';
 
 const sortTasks = (tasks, filter) => {
@@ -16,13 +21,14 @@ const sortTasks = (tasks, filter) => {
 
 const mapStateToProps = (state) => ({
   user_id: state.auth.user.user_id,
-  items: sortTasks(state.tasks.tasks, state.visibilityFilter),
+  items: sortTasks(state.tasks.tasks, state.tasks.filter),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getAllTasks: (user_id) => dispatch(getAllTasks(user_id)),
   markTask: (values, bool) => dispatch(markTask(values, bool)),
   deleteTask: (values) => dispatch(deleteTask(values)),
+  sortAllTasks: (type) => dispatch(sortAllTasks(type)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TasksHolder);

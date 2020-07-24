@@ -4,19 +4,14 @@ import { addTask } from '../../Actions/taskActions';
 import useForm from '../../Hooks/useForm';
 
 const TaskForm = ({ user_id, addTask }) => {
-  const [values, handleChange] = useForm();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleTaskSubmit = (e) => {
     values.user_id = user_id;
-    console.log(values.task_category);
-
     if (!values.task_category) {
       values.task_category = 'work';
     }
-
     addTask(values);
   };
+  const [values, handleChange, handleSubmit] = useForm(handleTaskSubmit);
 
   return (
     <form method="post" onSubmit={handleSubmit}>

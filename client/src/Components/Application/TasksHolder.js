@@ -3,7 +3,14 @@ import TaskItem from './TaskItem';
 import TaskForm from './TaskForm';
 import Plus from '../../images/plus.svg';
 
-const TasksHolder = ({ getAllTasks, markTask, deleteTask, items, user_id }) => {
+const TasksHolder = ({
+  getAllTasks,
+  markTask,
+  deleteTask,
+  items,
+  user_id,
+  sortAllTasks,
+}) => {
   const [showForm, setForm] = useState(false);
   const [showOptions, setOptions] = useState(false);
   const [selectValues, setSelectValues] = useState([]);
@@ -12,7 +19,12 @@ const TasksHolder = ({ getAllTasks, markTask, deleteTask, items, user_id }) => {
     getAllTasks(user_id);
   }, [getAllTasks, user_id]);
 
-  useEffect(() => {}, [markTask]);
+  const handleActions = () => {
+    setSelectValues([]);
+    document
+      .querySelectorAll('input[type=checkbox]')
+      .forEach((item) => (item.checked = false));
+  };
   return (
     <Fragment>
       <div className="menu">
@@ -34,22 +46,37 @@ const TasksHolder = ({ getAllTasks, markTask, deleteTask, items, user_id }) => {
             Actions
           </button>
           {showOptions ? (
-            <Fragment>
-              <button onClick={() => deleteTask(selectValues)}>Remove</button>
-              <button onClick={() => markTask(selectValues, 'true')}>
+            <div className="actions">
+              <button onClick={() => handleActions(deleteTask(selectValues))}>
+                Remove
+              </button>
+              <button
+                onClick={() => handleActions(markTask(selectValues, true))}
+              >
                 Mark Complete
               </button>
-              <button onClick={() => markTask(selectValues, 'false')}>
+              <button
+                onClick={() => handleActions(markTask(selectValues, false))}
+              >
                 Mark To do
               </button>
-            </Fragment>
+            </div>
           ) : null}
         </div>
         <div className="filter">
           <h2 style={{ color: 'white' }}> Filter:</h2>
-          <button className="filter">All</button>
-          <button className="filter">To do</button>
-          <button className="filter">Completed</button>
+          <button onClick={() => sortAllTasks('SHOW_ALL')} className="filter">
+            All
+          </button>
+          <button onClick={() => sortAllTasks('SHOW_TODO')} className="filter">
+            To do
+          </button>
+          <button
+            onClick={() => sortAllTasks('SHOW_COMPLETED')}
+            className="filter"
+          >
+            Completed
+          </button>
         </div>
       </div>
       <div className="task_holder">

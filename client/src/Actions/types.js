@@ -10,7 +10,7 @@ export const MARK_TASK = 'MARK_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 
 // Filters
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
+export const SET_TASK_SORT = 'SET_TASK_SORT';
 export const SHOW_ALL = 'SHOW_ALL';
 export const SHOW_COMPLETED = 'SHOW_COMPLETED';
 export const SHOW_TODO = 'SHOW_TODO';

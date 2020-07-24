@@ -28,6 +28,10 @@ const TaskItem = ({ data, selectValues, setSelectValues }) => {
           onChange={(e) => {
             if (e.target.checked) {
               setSelectValues([...selectValues, e.target.value]);
+            } else {
+              setSelectValues(
+                selectValues.filter((item) => item !== e.target.value)
+              );
             }
           }}
         />

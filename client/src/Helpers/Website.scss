@@ -10,12 +10,17 @@ header {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        flex-wrap: wrap;
+
 
         .header_logo {
             flex-grow: 1;
             height: 100%;
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+
+
 
             img {
                 max-height: 50%;
@@ -29,6 +34,11 @@ header {
             width: fit-content;
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
+
+            @include mobilelarge {
+                flex-grow: 1;
+            }
 
             ul {
 
@@ -56,11 +66,22 @@ header {
     width: 1440px;
     margin: 0 auto;
     height: 100%;
+
+
+
+    @include desktop {
+        width: 90%;
+    }
+
+
+    @include mobilelarge {
+        width: 95%;
+    }
 }
 
 
 .header_organised {
-    height: 500px;
+    height: 100%;
     margin: 150px auto;
 
     .header_message {
@@ -85,18 +106,41 @@ header {
     display: grid;
     grid-template-columns: 60% 40%;
     height: 100%;
+
+
+
+    @include tablet {
+        grid-template-columns: 1fr;
+    }
 }
 
 
 .features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 400px));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 3fr));
     gap: 25px;
-    height: 500px;
+    margin: 200px auto;
+
+    @include smalldesktop {
+        grid-template-columns: 1fr;
+        width: 70%;
+    }
 }
 
 .features.one {
     grid-template-columns: repeat(auto-fit, minmax(400px, 450px));
+
+
+    @include smalldesktop {
+        display: block;
+        width: 70%;
+    }
+
+    @include mobilelarge {
+        width: 95%;
+        margin: 0 auto;
+    }
+
 
     .features_section {
 
@@ -148,9 +192,9 @@ header {
     border-radius: 18px;
     position: relative;
     display: flex;
-
     justify-content: center;
     flex-direction: column;
+    min-height: 300px;
 
     h2 {
         color: black;

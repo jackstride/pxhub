@@ -12,7 +12,11 @@ const LoginNav = ({ isAuth, logout }) => {
       <button id="login" onClick={handleCLick}>
         {isAuth ? 'Portal' : 'Sign in'}
       </button>
-      {isAuth && <button onClick={() => logout()}>Logout</button>}
+      {isAuth && (
+        <button style={{ marginLeft: '10px' }} onClick={() => logout()}>
+          Logout
+        </button>
+      )}
     </Fragment>
   );
 };
