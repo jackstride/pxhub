@@ -27,7 +27,7 @@ router.post(`/login`, async (req, res, next) => {
         first_name,
       };
 
-      const token = await jwt.sign(payload, process.env.JWT_SECRET);
+      const token = await jwt.sign(payload, 'keyboardcat');
 
       res.header('Authorization', `bearer${token}`).json({ user: payload });
     }
