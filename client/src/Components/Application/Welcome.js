@@ -2,7 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Logo from '../../images/logo.svg';
 
-const Welcome = ({ firstName }) => {
+const Welcome = ({ firstName, taskCount }) => {
+  const getLength = (count) => {
+    return count ? count.length : 0;
+  };
+
+  const getCompleted = (count) => {
+    return count ? count.filter((item) => item.is_completed).length : 0;
+  };
+
   return (
     <div className="welcome_container">
       <div className="welcome_img">
@@ -12,8 +20,8 @@ const Welcome = ({ firstName }) => {
         <h1> Hey {firstName},</h1>
       </div>
       <div className="tasks_count">
-        <p>14 Tasks</p>
-        <p> 4 Completed</p>
+        <p>{getLength(taskCount)} Tasks</p>
+        <p> {getCompleted(taskCount)} Completed</p>
       </div>
     </div>
   );
@@ -22,6 +30,7 @@ const Welcome = ({ firstName }) => {
 const mapStateToProps = (state) => {
   return {
     firstName: state.auth.user.first_name,
+    taskCount: state.tasks.tasks,
   };
 };
 
