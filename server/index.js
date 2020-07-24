@@ -20,8 +20,11 @@ app.use(cors());
 app.use('/auth', authRoute);
 app.use('/task', taskRoute);
 
-// Errors handler I like it
+// Custom error handler for routes
+// res.status =
+// res.message =
 app.use((error, req, res, next) => {
+  console.error(error);
   if (error.status) {
     res.status(error.status);
   } else {

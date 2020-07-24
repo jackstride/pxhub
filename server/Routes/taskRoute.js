@@ -19,11 +19,10 @@ router.post(`/add`, async (req, res, next) => {
         'INSERT INTO tasks (task_id, user_id, task_title, task_category, is_completed, task_date) VALUES($1,$2,$3,$4,$5,$6) RETURNING *;',
         values
       );
-
-      res.json({ data: query.rows[0] });
+      return res.json({ data: query.rows[0] });
     }
   } catch (error) {
-    console.log(error);
+    return next(error);
   }
 });
 
@@ -37,7 +36,7 @@ router.get(`/all/:user_id`, async (req, res, next) => {
     ]);
     res.json({ tasks: query.rows });
   } catch (error) {
-    console.log(error);
+    return next(error);
   }
 });
 
@@ -53,28 +52,24 @@ router.patch('/mark_complete', async (req, res, next) => {
     const query = await db.query(
       `UPDATE tasks SET is_completed = '${bool}' WHERE task_id IN (${tasks});`
     );
-    console.log(query);
-    res.sendStatus(200);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
-  }
-});
-
-module.exports = router;
-
-router.delete('/delete', async (req, res, next) => {
-  let { task_id } = req.body;
-
-  try {
-    tasks = task_id.map((item) => `'${item}'`).join(',');
-
-    const query = await db.query(
-      `DELETE FROM tasks where task_id IN (${tasks})`
-    );
-    console.log(query);
-    res.sendStatus(200);
+    // Handles on frontend
+    return res.sendStatus(200);
   } catch (error) {
     return next(error);
   }
 });
+
+router.delete('/delete', async (req, res, next) => {
+  let { task_id } = req.body;
+  try {
+    tasks = task_id.map((item) => `'${item}'`).join(',');
+    const query = await db.query(
+      `DELETE FROM tasks where task_id IN (${tasks})`
+    );
+    return res.sendStatus(200);
+  } catch (error) {
+    return next(error);
+  }
+});
+
+module.exports = router;

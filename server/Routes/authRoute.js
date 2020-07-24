@@ -32,8 +32,7 @@ router.post(`/login`, async (req, res, next) => {
       res.header('Authorization', `bearer${token}`).json({ user: payload });
     }
   } catch (error) {
-    console.log(error);
-    res.sendStatus(504);
+    next(error);
   }
 });
 
