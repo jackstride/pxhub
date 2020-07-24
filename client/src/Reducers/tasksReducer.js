@@ -3,6 +3,9 @@ import {
   ADD_TASK,
   MARK_TASK,
   DELETE_TASK,
+  SHOW_ALL,
+  SHOW_TODO,
+  SHOW_COMPLETED,
 } from '../Actions/types';
 
 const initialState = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import Welcome from '../Components/Application/Welcome';
-import TaskHolder from '../Components/Application/TasksHolder';
+import TaskHolder from '../containers/VisibleTasks';
 
 const Application = () => {
   return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 const TaskItem = ({ data, selectValues, setSelectValues }) => {
   const getBackgroundColor = (cat) => {
@@ -47,7 +48,7 @@ const TaskItem = ({ data, selectValues, setSelectValues }) => {
       >
         <span>{data.task_category}</span>
       </div>
-      <p>{data.task_date}</p>
+      <p>{moment(data.task_date).calendar()}</p>
       {/* <div className={data.isCompleted ? 'status isComplete' : 'status'}>
         <span>{data.isCompleted ? 'Completed' : 'Outstanding'}</span>
       </div> */}

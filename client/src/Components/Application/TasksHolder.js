@@ -1,9 +1,7 @@
 import React, { useState, Fragment, useEffect } from 'react';
-import { connect } from 'react-redux';
 import TaskItem from './TaskItem';
 import TaskForm from './TaskForm';
 import Plus from '../../images/plus.svg';
-import { getAllTasks, markTask, deleteTask } from '../../Actions/taskActions';
 
 const TasksHolder = ({ getAllTasks, markTask, deleteTask, items, user_id }) => {
   const [showForm, setForm] = useState(false);
@@ -72,18 +70,4 @@ const TasksHolder = ({ getAllTasks, markTask, deleteTask, items, user_id }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user_id: state.auth.user.user_id,
-    items: state.tasks.tasks,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getAllTasks: (user_id) => dispatch(getAllTasks(user_id)),
-    markTask: (values, bool) => dispatch(markTask(values, bool)),
-    deleteTask: (values) => dispatch(deleteTask(values)),
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(TasksHolder);
+export default TasksHolder;

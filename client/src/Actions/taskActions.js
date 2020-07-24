@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { ADD_TASK, GET_ALL_TASKS, MARK_TASK, DELETE_TASK } from './types';
+import {
+  ADD_TASK,
+  GET_ALL_TASKS,
+  MARK_TASK,
+  DELETE_TASK,
+  SET_VISIBILITY_FILTER,
+} from './types';
 
 export const addTask = (values) => (dispatch) => {
   axios
@@ -55,3 +61,8 @@ export const deleteTask = (values) => (dispatch) => {
       });
     });
 };
+
+export const setVisibilityFilter = (filter) => ({
+  type: 'SET_VISIBILITY_FILTER',
+  filter,
+});
