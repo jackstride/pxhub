@@ -1,10 +1,16 @@
 # The People Experience Hub
 
-##### React,Redux,Express,SQL
+##### A simple tasks application created using React, Redux, Express & Posgres.
 
-- Install Node modules in both client and server
+- Basic Authentication added.
+- Exported Local test database file included.
 
-### Commands
+#### Basic Instructions
 
-- npm start (client)
-- npm start (server)
+- Checkout master branch.
+- Install depenendancies in both client and server directory.
+
+#### Database instructions
+
+- PGAdmin4 used for local database.
+- ** pxDatabase file is an exported DB from PGAdmin4. This will need to imported to a local PostGres server and additonal configuration in /server/DBConnect.js will allow database to server connection ** .
